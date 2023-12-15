@@ -9,6 +9,95 @@
 + Keyboard layout: German (DE), English (US), Spanish
   + Change keyboard layout: Alt + Space
 
+## Visual Studio Code
+
+## PostgresQL 16.1
+
+### Steps
+1. Install PostgreSQL
++ Use the script here: https://www.postgresql.org/download/linux/ubuntu/
+```
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql
+```
+
+2. Set up postgresql
++ https://help.ubuntu.com/community/PostgreSQL
+
+To start off, we need to set the password of the PostgreSQL user (role) called "postgres"; we will not be able to access the server externally otherwise. As the local “postgres” Linux user, we are allowed to connect and manipulate the server using the psql command.
+
+In a terminal, type:
+`sudo -u postgres psql postgres`
+this connects as a role with same name as the local user, i.e. "postgres", to the database called "postgres" (1st argument to psql).
+
+Set a password for the "postgres" database role using the command:
+`\password postgres`
+and give your password when prompted. The password text will be hidden from the console for security purposes.
+Type Control+D or \q to exit the posgreSQL prompt.
+
+```
+user: postgres
+password: somepass
+```
+
+### Alternative Server Setup
+
+If you don't intend to connect to the database from other machines, this alternative setup may be simpler.
+
+By default in Ubuntu, Postgresql is configured to use 'ident sameuser' authentication for any connections from the same machine. Check out the excellent Postgresql documentation for more information, but essentially this means that if your Ubuntu username is 'foo' and you add 'foo' as a Postgresql user then you can connect to the database without requiring a password.
+
+Since the only user who can connect to a fresh install is the postgres user, here is how to create yourself a database account (which is in this case also a database superuser) with the same name as your login name and then create a password for the user:
+
+ ```
+ sudo -u postgres createuser --superuser $USER
+ sudo -u postgres psql
+
+ postgres=# \password $USER
+```
+In the command `\password` replace `$USER` with your linux user.
+
+Now your linux user is also a postgres user with superuser privileges and can create a new database
+
+`$ createdb mydb`
+
+Client programs, by default, connect to the local host using your Ubuntu login name and expect to find a database with that name too. So to make things REALLY easy, use your new superuser privileges granted above to create a database with the same name as your login name:
+```
+ sudo -u postgres createdb $USER
+```
+Connecting to your own database to try out some SQL should now be as easy as:
+```
+ psql
+```
+Creating additional database is just as easy, so for example, after running this:
+```
+ create database amarokdb;
+```
+You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
+
+## DBeaver
++ www.dbeaver.io
++ Download Debian package `dbeaver-ce_23.3.0_amd64.deb`
++ `sudo dpkg -i ./dbeaver-ce_23.3.0_amd64.deb`
++ The proper driver for the database engine is required
+
+## PstgreSQL JDBC Driver
++ https://jdbc.postgresql.org
++ `postgresql-42.7.1.jar`
++ Moved the driver to `/opt/jdbc`
+
+
+## OpenJDK
++ Version 21 (latest LTS version)
++ `sudo apt install openjdk-21-jr-headless`
++ `sudo apt-get install openjdk-17-jdk openjdk-17-demo openjdk-17-doc openjdk-17-jre-headless openjdk-17-source`
+
+## Connect dBeaver to a PostgreSQL database
++ https://www.youtube.com/watch?v=zYhv1Dj8Gmw
+
+## Create Tables in the SQL database using dBeaver
+
 ## FHIR server
 
 + HAPI FHIR Plain Server
@@ -17,3 +106,9 @@
 + https://hapifhir.io/hapi-fhir/docs/server_plain/get_started.html
 + Rest server skeleton
 + https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-rest-server-skeleton/
++ Slide deck James Agnew HAPI FHIR Servers
++ https://docs.google.com/presentation/d/1aS-pH9mIAbQt44Bn_3Z9Vt9YEmg9chU_E5rqaI0zwvE/edit#slide=id.g29ccea6f42_0_1
++ Talk at DevDays 2018
++ https://www.youtube.com/watch?v=1V4f8cKs51Q
++ Chapter: Building the server
+  
