@@ -24,6 +24,7 @@
   + The HAPI server takes care of the FHIR stuff
   + We need to write code to convert between FHIR and our database
   + We need to write Java code
+  + Introduction to FHIR and databases: https://www.youtube.com/playlist?list=PLsR-zcO--dyoLTrhQ6r3ThlAsRBL-FR25
 
 ## Installed Visual Studio Code
 
