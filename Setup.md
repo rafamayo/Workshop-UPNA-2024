@@ -16,6 +16,7 @@
   + The database should be created but left empty
   + The schema, the tables as well as taking care of all the FHIR stuff is done by the FHIR server
   + This is the easier version, but we have no control of the database schema
+  + This option is described here: https://www.youtube.com/watch?v=5ypS1XJm4YE
 2. Use the Plain HAPI FHIR server with any database
   + This is the best option when a legacy database exists or when we want to control the schema of the database
   + Also the best option when the FHIR resources not appropriate for our application
