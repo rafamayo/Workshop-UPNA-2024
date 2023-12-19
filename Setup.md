@@ -8,10 +8,25 @@
 + Language: English (US)
 + Keyboard layout: German (DE), English (US), Spanish
   + Change keyboard layout: Alt + Space
+ 
+## Two different Scenarios
+1. Use the JPA HAPI FHIR server with a supported database
+  + This is the best option when creating a server from scratch and when the FHIR resources are appropriate out of the box
+  + Here is a list of the supported databases: https://hapifhir.io/hapi-fhir/docs/server_jpa/database_support.html
+  + The database should be created but left empty
+  + The schema, the tables as well as taking care of all the FHIR stuff is done by the FHIR server
+  + This is the easier version, but we have no control of the database schema
+2. Use the Plain HAPI FHIR server with any database
+  + This is the best option when a legacy database exists or when we want to control the schema of the database
+  + Also the best option when the FHIR resources not appropriate for our application
+  + We control completely the schema of the database
+  + The HAPI server takes care of the FHIR stuff
+  + We need to write code to convert between FHIR and our database
+  + We need to write Java code
 
-## Visual Studio Code
+## Installed Visual Studio Code
 
-## PostgresQL 16.1
+## Installed PostgresQL 16.1
 
 ### Steps
 1. Install PostgreSQL
@@ -76,19 +91,19 @@ Creating additional database is just as easy, so for example, after running this
 ```
 You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
 
-## DBeaver
+## Installed DBeaver
 + www.dbeaver.io
 + Download Debian package `dbeaver-ce_23.3.0_amd64.deb`
 + `sudo dpkg -i ./dbeaver-ce_23.3.0_amd64.deb`
 + The proper driver for the database engine is required
 
-## PstgreSQL JDBC Driver
+## Installed PstgreSQL JDBC Driver
 + https://jdbc.postgresql.org
 + `postgresql-42.7.1.jar`
 + Moved the driver to `/opt/jdbc`
 
 
-## OpenJDK
+## Installed OpenJDK
 + Version 21 (latest LTS version)
 + `sudo apt install openjdk-21-jr-headless`
 + `sudo apt-get install openjdk-17-jdk openjdk-17-demo openjdk-17-doc openjdk-17-jre-headless openjdk-17-source`
