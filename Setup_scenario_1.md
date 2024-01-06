@@ -5,3 +5,21 @@
   + The schema, the tables as well as taking care of all the FHIR stuff is done by the FHIR server
   + This is the easier version, but we have no control of the database schema
   + This option is described here: https://www.youtube.com/watch?v=5ypS1XJm4YE
+
+
+
+
+
+
+
+
+## Install DBeaver
++ www.dbeaver.io
++ Download Debian package `dbeaver-ce_23.3.0_amd64.deb`
++ `sudo dpkg -i ./dbeaver-ce_23.3.0_amd64.deb`
++ The proper driver for the database engine is required
+
+## Install PstgreSQL JDBC Driver
++ https://jdbc.postgresql.org
++ `postgresql-42.7.1.jar`
++ Moved the driver to `/opt/jdbc`
