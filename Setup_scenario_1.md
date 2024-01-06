@@ -108,3 +108,7 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 
 ## Install Apache Tomcat on Ubuntu
 
++ Apache Tomcat is a Java web application server.. It provides a *pure Java* HTTP web server environment in which Java code can also run.
++ https://tomcat.apache.org/
++ Version 10.1.17
++ https://linuxize.com/post/how-to-install-tomcat-10-on-ubuntu-22-04/
