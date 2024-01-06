@@ -86,3 +86,6 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 + https://jdbc.postgresql.org
 + `postgresql-42.7.1.jar`
 + Moved the driver to `/opt/jdbc`
++ 
+## Connect dBeaver to a PostgreSQL database
++ https://www.youtube.com/watch?v=zYhv1Dj8Gmw
