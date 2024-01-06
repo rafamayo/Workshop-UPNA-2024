@@ -122,3 +122,10 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 + To shutdown the servr run `~/opt/tomcat/latest/bin/shutdown.sh`
 + The server can be reached at `http://localhost:8080`
 
+
+## Install the HAPI FHIR Server
++ Download the Zip-file (latest version) from `https://github.com/hapifhir/hapi-fhir-jpaserver-starter`
++ Extracted into `~/opt/hapi-fhir-jpaserver-starter`
+
+
+## Install the spring tools for Java
