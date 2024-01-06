@@ -99,3 +99,12 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 
 ## Create a new database using dbeaver
 
+![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/Create_new_db_dbeaver_1.png?raw=true)
+
+![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/Create_new_db_dbeaver_2.png?raw=true)
+
+![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/Create_new_db_dbeaver_3.png?raw=true)
+
+
+## Install Apache Tomcat on Ubuntu
+
