@@ -128,4 +128,7 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 + Extracted into `~/opt/hapi-fhir-jpaserver-starter`
 
 
-## Install the spring tools for Java
+## Install the Spring Tools Suite
+Install the Spring Tools Suite as an extension in VS Code `https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack`
+
+
