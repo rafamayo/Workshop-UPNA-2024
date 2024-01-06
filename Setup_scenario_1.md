@@ -113,9 +113,12 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 + Version 10.1.17
 + https://linuxize.com/post/how-to-install-tomcat-10-on-ubuntu-22-04/
 
-The following command creates a new system user and group with home directory /opt/tomcat that will run the Tomcat service:
-```
-sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
-```
++ Didn't add the system user. Just performed a very simple installation
++ Download the current version
++ Extracted into `~/opt/tomcat/apache-tomcat-10.1.17`
++ Created a symbolic link `sudo ln -s ~/opt/tomcat/apache-tomcat-10.1.17 ~/opt/tomcat/latest`
++ Make the scripts inside the tomcat `bin` folder executable: `sudo chmod +x ~/opt/tomcat/latest/bin/*.sh`
++ To start the server run `~/opt/tomcat/latest/bin/startup.sh`
++ To shutdown the servr run `~/opt/tomcat/latest/bin/shutdown.sh`
++ The server can be reached at `http://localhost:8080`
 
-Extracted into `/opt/tomcat`
