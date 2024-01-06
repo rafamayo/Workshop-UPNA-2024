@@ -137,8 +137,10 @@ Figure
 
 Install the recommended JAVA extension packs
 
-Modify the datasource in src/resources/application.yaml
-Lines 17 - 20
-database: fhir_server
-user: somebody
-password: somepass
++ Modify the datasource in src/resources/application.yaml
+  + Lines 17 - 20
+  + database: fhir_server
+  + user: somebody
+  + password: somepass
+
++ Line 186 tester:
