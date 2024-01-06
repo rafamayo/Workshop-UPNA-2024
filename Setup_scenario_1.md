@@ -72,20 +72,30 @@ Creating additional database is just as easy, so for example, after running this
 You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
 
 
-
-
+## Install OpenJDK
++ Java is required for dbeaver and for the HAPI FHIR Server
++ Version 21 (latest LTS version)
++ `sudo apt install openjdk-21-jr-headless`
++ `sudo apt-get install openjdk-17-jdk openjdk-17-demo openjdk-17-doc openjdk-17-jre-headless openjdk-17-source`
 
 
 ## Install DBeaver
 + www.dbeaver.io
 + Download Debian package `dbeaver-ce_23.3.0_amd64.deb`
 + `sudo dpkg -i ./dbeaver-ce_23.3.0_amd64.deb`
-+ The proper driver for the database engine is required
++ The proper driver for the database engine is required: PostgreSQL JDBC Driver
 
-## Install PstgreSQL JDBC Driver
+
+## Install PostgreSQL JDBC Driver
 + https://jdbc.postgresql.org
 + `postgresql-42.7.1.jar`
 + Moved the driver to `/opt/jdbc`
-+ 
+
+  
 ## Connect dBeaver to a PostgreSQL database
 + https://www.youtube.com/watch?v=zYhv1Dj8Gmw
++ How to create and configure a new connection to a PostgreSQL database
+
+
+## Create a new database using dbeaver
+
