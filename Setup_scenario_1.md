@@ -129,7 +129,13 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 
 
 ## Install the Spring Tools Suite
-Install the Spring Tools Suite as an extension in VS Code `https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack`
++ https://youtu.be/U3C8tTxYa7k?feature=shared
++ Download from https://spring.io/tools/
++ Copy into ~/opt/
++ Extract
++ Execute the file `SpringToolSuite4`
++ Configure the spring tools as described im the video  https://www.youtube.com/watch?v=5ypS1XJm4YE
+
 
 ## Import the HAPI FHIR Server project into VS Code
 Figure
