@@ -131,11 +131,22 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 ## Install the Spring Tools Suite
 + https://youtu.be/U3C8tTxYa7k?feature=shared
 + Download from https://spring.io/tools/
++ Version 4.21.0
 + Copy into ~/opt/
 + Extract
 + Execute the file `SpringToolSuite4`
 + Configure the spring tools as described im the video  https://www.youtube.com/watch?v=5ypS1XJm4YE
-
+  + Select workspace directory: `~/opt/test_fhir`
+  + Set the JDK file: select the installed openjdk 21
+  + Select apache tomcat as server. Select the runtime environment version 10.1
+  + Specify the installation directory: ~/opt/tomcat/apache-tomcat-10.1.17
+  + Import the HAPI FHIR Server project
+  + Modify the file src/main/resources/application.yaml
+  + Change datasource (line 16) to use postgresql and the correct database name (fhir_server). Set the correct user and password
+  + Change Tester (line 186)
+  + Create a server view and a new server
+  + Add the HAPI FHIR project into the newly created server
+  + Right-click on server and select debug
 
 ## Import the HAPI FHIR Server project into VS Code
 Figure
