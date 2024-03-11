@@ -6,7 +6,8 @@ app = Flask(__name__)
 # Default FHIR server settings
 settings = {
     'app_id': 'my_web_app',
-    'api_base': 'https://fhir.server/baseDstu3/'  # Default FHIR server URL
+    'api_base': 'http://127.0.0.1:8080/fhir/' # The default FHIR server runs on the localhost
+#    'api_base': 'https://fhir.server/baseDstu3/' # A public test server
 }
 smart = client.FHIRClient(settings=settings)
 
