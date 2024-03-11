@@ -23,6 +23,13 @@ We create a simple clinical web application using python and flask to interact w
 ## Bonus
 + We'll make the application look nicer using some material design elements
 
+## Five steps for the development of our web app
+1. Basic structure and getting the web app running
+2. Adding basic functionality: creating and searching resources
+3. Adding references
+4. Performing searches with references
+5. Making the web app look nicer
+
 
 # Use case for the web app
 
