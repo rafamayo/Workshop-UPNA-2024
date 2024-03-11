@@ -106,7 +106,11 @@ Flask operates as a web server that listens for requests from web clients (such 
 + Flask needs to be installed on the system: `pip install Flask`
 + To interact with the FHIR server we will use the `fhirclient` python client. The correspondig package needs to be installed: `pip install fhirclient` 
 
+## Cloning the repository
 
++ Clone the repository using `git clone https://github.com/rafamayo/Workshop-UPNA-2024.git` 
++ Create and activate the virtual environment in the folder `Workshop-UPNA-2024`
++ Download and install all required packages using `pip install -r requirements.txt`
 
 **References**
 
