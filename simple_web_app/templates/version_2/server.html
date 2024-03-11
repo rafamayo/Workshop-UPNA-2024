@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set FHIR Server</title>
+</head>
+<body>
+    <h1>Set FHIR Server URL</h1>
+    <form method="post" action="/server">
+        <label for="server_url">FHIR Server URL:</label><br>
+        <input type="text" id="server_url" name="server_url" value="{{ server_url }}"><br>
+        <input type="submit" value="Update Server">
+        <!-- Cancel button to return to the index page -->
+        <a href="/"><button type="button">Cancel</button></a>
+    </form>
+</body>
+</html>
+

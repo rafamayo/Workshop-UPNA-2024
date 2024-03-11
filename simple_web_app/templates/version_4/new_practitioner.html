@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Practitioner</title>
+</head>
+<body>
+    <h1>Create New Practitioner</h1>
+    <form method="post" action="/new_practitioner">
+        <input type="text" name="last_name" placeholder="Last Name" required><br>
+        <input type="text" name="given_name" placeholder="Given Name" required><br>
+        <input type="date" name="birth_date" placeholder="Date of Birth" required><br>
+        <select name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="unknown">Unknown</option>
+        </select><br>
+        <input type="text" name="postcode" placeholder="Postcode" required><br>
+        <input type="text" name="city" placeholder="City" required><br>
+        <input type="text" name="country" placeholder="Country" required><br>
+        <input type="submit" value="Create Practitioner">
+        <!-- Cancel button to return to the index page -->
+        <a href="/"><button type="button">Cancel</button></a>
+    </form>
+    <!-- Display the message if it exists -->
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+</body>
+</html>

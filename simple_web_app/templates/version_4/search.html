@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <h1>Search for Practitioner or Patient</h1>
+    <form method="post" action="/search">
+        <select name="resource_type">
+            <option value="Practitioner">Practitioner</option>
+            <option value="Patient">Patient</option>
+        </select><br>
+        <input type="text" name="last_name" placeholder="Last Name"><br>
+        <input type="text" name="given_name" placeholder="Given Name"><br>
+        <input type="date" name="birth_date" placeholder="Date of Birth"><br>
+        <select name="gender">
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="unknown">Unknown</option>
+        </select><br>
+        <input type="text" name="postcode" placeholder="Postcode"><br>
+        <input type="text" name="city" placeholder="City"><br>
+        <input type="text" name="country" placeholder="Country"><br>
+        <input type="submit" value="Search">
+        <!-- Cancel button to return to the index page -->
+        <a href="/"><button type="button">Cancel</button></a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for {{ resource_type }}</h1>
+    <!-- Rendering Practitioners together with their Patients if any -->
+    {% if resource_type == 'Practitioner' %}
+        {% if practitioners_to_patients %}
+            <ul>    
+            {% for practitioner, patients in practitioners_to_patients.items() %}
+                <li>
+                    <strong>Practitioner:</strong> {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }}</h2>
+                    {% if patients %}
+                        <ul>
+                        {% for patient in patients %}
+                            <li>
+                                Name: {{ patient.name[0].given[0] }} {{ patient.name[0].family }}
+                                {% if patient.birthDate %}
+                                    - Date of Birth: {{ patient.birthDate | fhirdate }}
+                                {% endif %}
+                                {% if patient.gender %}
+                                    - Gender: {{ patient.gender }}
+                                {% endif %}
+                                {% if patient.address %}
+                                    - Address: {{ patient.address[0].country }}, {{ patient.address[0].city }}, {{ patient.address[0].postalCode }}
+                                {% endif %}
+                            </li>  
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <ul><li>No patients associated.</li></ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    {% else %}
+        <!-- Rendering Patients -->
+        {% if search_results %}
+            <ul>
+            {% for result in search_results %}
+                <li>
+                    Name: {{ result.name[0].given[0] }} {{ result.name[0].family }}
+                    {% if result.birthDate %}
+                    - Date of Birth: {{ result.birthDate | fhirdate }}
+                    {% endif %}
+                    {% if result.gender %}
+                    - Gender: {{ result.gender }}
+                    {% endif %}
+                    {% if result.address %}
+                    - Address: {{ result.address[0].country }}, {{ result.address[0].city }}, {{ result.address[0].postalCode }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    {% endif %}
+    <a href="/search">Back to Search</a>
+</body>
+</html>
