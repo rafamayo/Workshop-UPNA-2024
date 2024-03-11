@@ -1,172 +1,30 @@
 from flask import Flask, render_template, request, redirect, url_for
 from fhirclient import client
-import fhirclient.models.practitioner as practitioner
-import fhirclient.models.patient as patient
-from fhirclient.models.fhirreference import FHIRReference
-
 
 app = Flask(__name__)
 
 # Default FHIR server settings
 settings = {
     'app_id': 'my_web_app',
-    'api_base': 'http://127.0.0.1:8080/fhir/' # The default FHIR server runs on the localhost
-#    'api_base': 'https://fhir.server/baseDstu3/' # A public test server
+    'api_base': 'https://fhir.server/baseDstu3/'  # Default FHIR server URL
 }
 smart = client.FHIRClient(settings=settings)
-
-# A jinja2 filter to format fhirdate objects
-@app.template_filter('fhirdate')
-def fhirdate_filter(date):
-    if date is not None and hasattr(date, 'date'):
-#        return date.date.isoformat()    # ISO format YYYY-MM-DD
-        return date.date.strftime('%d/%m/%Y')   # Format DD/MM/YYYY
-    return 'Unknown'
-
-app.jinja_env.filters['fhirdate'] = fhirdate_filter
 
 @app.route('/')
 def index():
     return render_template('index.html', title='FHIR Server')
 
-@app.route('/new_practitioner', methods=['GET', 'POST'])
-def create_practitioner():
-    message = None  # Initialize message variable
-    practitioner_id = None  # Initialize practitioner ID variable
-    
-    if request.method == 'POST':
-        # Convert the birthdate string from the form into the correct format
-        birth_date_str = request.form['birth_date']
-        
-        # Construct Practitioner resource
-        prac = practitioner.Practitioner({
-            'name': [{
-                'use': 'official',
-                'family': request.form['last_name'],
-                'given': [request.form['given_name']],
-            }],
-            'gender': request.form['gender'],
-            'birthDate': birth_date_str,
-            'address': [{
-                'line': [],
-                'city': request.form['city'],
-                'postalCode': request.form['postcode'],
-                'country': request.form['country']
-            }]
-        })
-        
-        # Attempt to create the Practitioner on the FHIR server
-        try:
-            result = prac.create(smart.server)
-            if result:
-                practitioner_id = prac.id  # Capture the ID of the created practitioner
-                message = f'Practitioner successfully created with ID: {practitioner_id}'
-        except Exception as e:
-            message = f"An error occurred: {str(e)}"
-    
-    # Render the same template whether a POST request was successful or not
-    return render_template('new_practitioner.html', message=message, practitioner_id=practitioner_id)
+@app.route('/new_practitioner')
+def new_practitioner():
+    return render_template('new_practitioner.html')
 
-
-@app.route('/new_patient', methods=['GET', 'POST'])
+@app.route('/new_patient')
 def new_patient():
+    return render_template('new_patient.html')
 
-    # Fetch practitioners to populate the dropdown
-    practitioners_query = practitioner.Practitioner.where({})
-    practitioners = practitioners_query.perform_resources(smart.server)
-    practitioner_list = [{'id': prac.id, 'name': f"{prac.name[0].given[0]} {prac.name[0].family}"} for prac in practitioners if prac.name]
-
-
-    if request.method == 'POST':
-        # Logic to create the new patient
-        new_patient = patient.Patient({
-            'name': [{
-                'use': 'official',
-                'family': request.form['last_name'],
-                'given': [request.form['given_name']],
-            }],
-            'gender': request.form['gender'],
-            'birthDate': request.form['birth_date'],
-            'address': [{
-                'line': [request.form['postcode'] + ' ' + request.form['city'] + ' ' + request.form['country']],
-                'city': request.form['city'],
-                'postalCode': request.form['postcode'],
-                'country': request.form['country']
-            }]
-        })
-
-        # Assuming the selection of a practitioner is optional, include it if provided
-        practitioner_id = request.form.get('practitioner_id')
-        if practitioner_id:
-            # Create a FHIRReference for the generalPractitioner
-            gp_reference = FHIRReference({
-                'reference': f"Practitioner/{practitioner_id}"
-            })
-            new_patient.generalPractitioner = [gp_reference]
-
-
-
-
-
-        # Attempt to create the Practitioner on the FHIR server
-        try:
-            result = new_patient.create(smart.server)
-            if result:
-                patient_id = new_patient.id  # Capture the ID of the created patient
-                message = f'Patient successfully created with ID: {patient_id}'
-        except Exception as e:
-            message = f"An error occurred: {str(e)}"
-        
-        #return redirect(url_for('index'))  # Redirect to the index page after creation
-        return render_template('new_patient.html', message=message, practitioners=practitioner_list)
-    
-    
-    return render_template('new_patient.html', practitioners=practitioner_list)
-
-
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search')
 def search():
-    if request.method == 'POST':
-        resource_type = request.form['resource_type']
-        search_params = {
-            'family': request.form.get('last_name', ''),
-            'given': request.form.get('given_name', ''),
-            'birthdate': request.form.get('birth_date', ''),
-            'gender': request.form.get('gender', ''),
-            'address-postalcode': request.form.get('postcode', ''),
-            'address-city': request.form.get('city', ''),
-            'address-country': request.form.get('country', '')
-        }
-        
-        # Filter out empty search parameters
-        search_params = {k: v for k, v in search_params.items() if v}
-        
-        practitioners_to_patients = {}
-        search_result = []
-        
-        # Perform search based on resource type
-        if resource_type == 'Practitioner':
-            search_result = practitioner.Practitioner.where(search_params).perform_resources(smart.server)
-            # For each practitioner found, find related patients
-            for prac in search_result:
-                prac_id = prac.id
-                # Search for patients with the current practitioner as their generalPractitioner
-                patient_search_result = patient.Patient.where({'general-practitioner': f'Practitioner/{prac_id}'}).perform_resources(smart.server)
-                
-                # This is a dictionary where: each key is a Practitioner object (resulting from the FHIR search) and
-                # each corresponding value is a list of Patient objects that reference the respective Practitioner.
-                practitioners_to_patients[prac] = patient_search_result
-            # Render a template with both practitioners and related patients
-            return render_template('search_results.html', practitioners_to_patients=practitioners_to_patients, resource_type=resource_type)
-        else:  # Default to Patient search
-            search_result = patient.Patient.where(search_params).perform_resources(smart.server)
-            # Render a template with search results for patients only
-            return render_template('search_results.html', search_results=search_result, resource_type=resource_type)
-
-    # If the request method is not POST, just render the search form page
     return render_template('search.html')
-
-
 
 @app.route('/server', methods=['GET', 'POST'])
 def server_info():
