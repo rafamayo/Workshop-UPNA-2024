@@ -26,6 +26,9 @@ We create a simple clinical web application using python and flask to interact w
 
 # Use case for the web app
 
+![Use case for the web app](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/assets/Scenario_web_app.png?raw=true)
+
+
 # What is Flask?
 
 Flask is a lightweight WSGI (Web Server Gateway Interface) web application framework written in Python. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It was developed by Armin Ronacher as part of the Pocoo projects collection.
