@@ -99,4 +99,4 @@ Flask operates as a web server that listens for requests from web clients (such 
 **References**
 
 + https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
-
++ https://www.darioz.ch/posts/venv-and-git/venv-and-git/
