@@ -165,7 +165,7 @@ spring:
 + The master table is `hfj_resource`
   + `select * from hfj_resource where res_type = 'Patient'`
   
-![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/figures/sql_query_hfj_resource.png?raw=true)
+![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/assets/sql_query_hfj_resource.png?raw=true)
 
   + There is one row (there is just one resource in the database) containing *administrative* information about the resource. The most important columns are:
     + res_id
@@ -176,7 +176,7 @@ spring:
 + To find the information corresponding to our newly created resource, we use the `res_id` from the table `hfj_resource`
 + `select * from hfj_res_ver where res_id = 1`
 
-![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/figures/sql_query_hfj_res_ver.png?raw=true)
+![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/assets/sql_query_hfj_res_ver.png?raw=true)
 
 + Every resource has a many rows as versions (versions are created when the resource is updated)
 + The *raw* information is in one of the columns `rest_text` or `res_text_vc`
