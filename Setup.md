@@ -165,7 +165,7 @@ spring:
 + The master table is `hfj_resource`
   + `select * from hfj_resource where res_type = 'Patient'`
   
-![alt text](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/assets/sql_query_hfj_resource.png?raw=true)
+![Running a query using dbeaver](https://github.com/rafamayo/Workshop-UPNA-2024/blob/main/assets/sql_query_hfj_resource.png?raw=true)
 
   + There is one row (there is just one resource in the database) containing *administrative* information about the resource. The most important columns are:
     + res_id
