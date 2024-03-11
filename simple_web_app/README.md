@@ -1,6 +1,6 @@
 # A simple clinical web application
 
-We create a simple clinical web application using python and flask to interact with the FHIR server.
+A simple clinical web application using python and flask to interact with the FHIR server.
 
 ## Basic Requirements
 + Specify the base url of the FHIR server to connect to
@@ -25,6 +25,8 @@ We create a simple clinical web application using python and flask to interact w
 
 
 # Use case for the web app
+
+
 
 # What is Flask?
 

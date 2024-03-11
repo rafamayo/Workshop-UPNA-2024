@@ -2,33 +2,14 @@
 <html>
 <head>
     <title>{{ title }}</title>
-    <!-- Compiled and minified Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <style>
-        /* Additional custom styling can go here */
-        .container {
-            margin-top: 20px;
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1 class="header center">{{ title }}</h1>
-        <div class="row button-container">
-            <a href="/new_practitioner" class="waves-effect waves-light btn-large col s12 m6">New Practitioner</a>
-            <a href="/new_patient" class="waves-effect waves-light btn-large col s12 m6">New Patient</a>
-            <a href="/search" class="waves-effect waves-light btn-large col s12 m6"></i>Search</a>
-            <a href="/server" class="waves-effect waves-light btn-large col s12 m6">Server</a>
-        </div>
+    <h1>{{ title }}</h1>
+    <div>
+        <a href="/new_practitioner"><button>New Practitioner</button></a>
+        <a href="/new_patient"><button>New Patient</button></a>
+        <a href="/search"><button>Search</button></a>
+        <a href="/server"><button>Server</button></a>
     </div>
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
 </body>
 </html>
-
