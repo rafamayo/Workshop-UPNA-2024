@@ -1,37 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create New Patient</title>
+    <title>Search</title>
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .container { margin-top: 20px; }
+        .input-field { margin-bottom: 20px; }
+    </style>
 </head>
+
 <body>
-    <h1>Create New Patient</h1>
-    <form method="post" action="/new_patient">
-        <input type="text" name="last_name" placeholder="Last Name" required><br>
-        <input type="text" name="given_name" placeholder="Given Name" required><br>
-        <input type="date" name="birth_date" placeholder="Date of Birth" required><br>
-        <select name="gender" required>
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-            <option value="unknown">Unknown</option>
-        </select><br>
-        <input type="text" name="postcode" placeholder="Postcode" required><br>
-        <input type="text" name="city" placeholder="City" required><br>
-        <input type="text" name="country" placeholder="Country" required><br>
-        <select name="practitioner_id" required>
-            <option value="">Select Practitioner</option>
-            {% for prac in practitioners %}
-                <option value="{{ prac.id }}">{{ prac.name }}</option>
-            {% endfor %}
-        </select><br>
-        <input type="submit" value="Create Patient">
-        <!-- Cancel button to return to the index page -->
-        <a href="/"><button type="button">Cancel</button></a>
-    </form>
-    <!-- Display the message if it exists -->
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+    <div class="container">
+        <h3 class="header center">Create New Patient</h3>
+        <form method="post" action="/new_patient" class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="last_name" type="text" name="last_name">
+                    <label for="last_name">Last Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="given_name" type="text" name="given_name">
+                    <label for="given_name">Given Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="birth_date" type="date" name="birth_date" class="datepicker">
+                    <label for="birth_date">Date of Birth</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="gender">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <label>Gender</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="postcode" type="text" name="postcode">
+                    <label for="postcode">Postcode</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="city" type="text" name="city">
+                    <label for="city">City</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="country" type="text" name="country">
+                    <label for="country">Country</label>
+                </div>
+                <div class="input-field col s12">
+                    <select name="practitioner_id">
+                        <option value="" disabled selected>Select Practitioner</option>
+                        {% for prac in practitioners %}
+                            <option value="{{ prac.id }}">{{ prac.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Resource Type</label>
+                </div>
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Create Patient</button>
+                    <a href="/" class="waves-effect waves-teal btn-flat">Cancel</a>
+                </div>
+            </div>
+        </form>
+        <!-- Display the message if it exists -->
+        {% if message %}
+            <div class="card-panel green lighten-2">
+                <span class="white-text text">{{ message }}</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Compiled and minified Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems);
+            var dateElems = document.querySelectorAll('.datepicker');
+            M.Datepicker.init(dateElems, {format: 'yyyy-mm-dd'});
+        });
+    </script>
 </body>
 </html>

@@ -5,24 +5,44 @@
     <!-- Compiled and minified Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
-        /* Additional custom styling can go here */
         .container {
-            margin-top: 20px;
+            margin-top: 40px;
         }
-        .button-container {
-            margin-top: 20px;
+        .centered-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px; /* Adjust based on preferred maximum width */
+            margin: 0 auto; /* Center the grid */
+        }
+        .grid-item {
+            padding: 10px; /* Space between buttons */
+            width: 50%; /* Each button takes half the width of the container */
+            box-sizing: border-box; /* Include padding in the element's total width */
+        }
+        .btn-large {
+            width: 100%; /* Extend button to the full width of its container */
+            text-align: center; /* Ensure text is centered */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="header center">{{ title }}</h1>
-        <div class="row button-container">
-            <a href="/new_practitioner" class="waves-effect waves-light btn-large col s12 m6">New Practitioner</a>
-            <a href="/new_patient" class="waves-effect waves-light btn-large col s12 m6">New Patient</a>
-            <a href="/search" class="waves-effect waves-light btn-large col s12 m6"></i>Search</a>
-            <a href="/server" class="waves-effect waves-light btn-large col s12 m6">Server</a>
+        <h3 class="header center">{{ title }}</h3>
+        <div class="centered-grid">
+            <div class="grid-item">
+                <a href="/new_practitioner" class="waves-effect waves-light btn-large">New Practitioner</a>
+            </div>
+            <div class="grid-item">
+                <a href="/new_patient" class="waves-effect waves-light btn-large">New Patient</a>
+            </div>
+            <div class="grid-item">
+                <a href="/search" class="waves-effect waves-light btn-large">Search</a>
+            </div>
+            <div class="grid-item">
+                <a href="/server" class="waves-effect waves-light btn-large">Server</a>
+            </div>
         </div>
     </div>
 
@@ -31,4 +51,3 @@
 
 </body>
 </html>
-

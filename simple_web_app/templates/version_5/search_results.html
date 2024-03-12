@@ -2,65 +2,90 @@
 <html>
 <head>
     <title>Search Results</title>
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .collection-header { /* Styling for collection headers */
+            background-color: #e0f2f1; /* Light teal background */
+            color: #26a69a; /* Teal text, you can change colors as needed */
+        }
+        .collection-item {
+            border-bottom: none !important; /* Remove border for cleaner look */
+        }
+        .details {
+            margin-left: 20px; /* Indentation for details under each Practitioner or Patient */
+        }
+    </style>
 </head>
 <body>
-    <h1>Search Results for {{ resource_type }}</h1>
-    <!-- Rendering Practitioners together with their Patients if any -->
-    {% if resource_type == 'Practitioner' %}
-        {% if practitioners_to_patients %}
-            <ul>    
-            {% for practitioner, patients in practitioners_to_patients.items() %}
-                <li>
-                    <strong>Practitioner:</strong> {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }}</h2>
+    <div class="container">
+        <h3 class="header center">Search Results for {{ resource_type }}</h3>
+        <!-- Rendering Practitioners together with their Patients if any -->
+        {% if resource_type == 'Practitioner' %}
+            {% if practitioners_to_patients %}
+                <ul class="collection with-header">    
+                {% for practitioner, patients in practitioners_to_patients.items() %}
+                    <li class="collection-header">
+                        <h6>Practitioner: {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }}</h6>
+                    </li>
                     {% if patients %}
-                        <ul>
                         {% for patient in patients %}
-                            <li>
-                                Name: {{ patient.name[0].given[0] }} {{ patient.name[0].family }}
-                                {% if patient.birthDate %}
-                                    - Date of Birth: {{ patient.birthDate | fhirdate }}
-                                {% endif %}
-                                {% if patient.gender %}
-                                    - Gender: {{ patient.gender }}
-                                {% endif %}
-                                {% if patient.address %}
-                                    - Address: {{ patient.address[0].country }}, {{ patient.address[0].city }}, {{ patient.address[0].postalCode }}
-                                {% endif %}
+                            <li class="collection-item">
+                                <div class="details">
+                                    Name: {{ patient.name[0].given[0] }} {{ patient.name[0].family }}
+                                    {% if patient.birthDate %}
+                                        - Date of Birth: {{ patient.birthDate | fhirdate }}
+                                    {% endif %}
+                                    {% if patient.gender %}
+                                        - Gender: {{ patient.gender }}
+                                    {% endif %}
+                                    {% if patient.address %}
+                                        - Address: {{ patient.address[0].country }}, {{ patient.address[0].city }}, {{ patient.address[0].postalCode }}
+                                    {% endif %}
+                                </div>
                             </li>  
                         {% endfor %}
-                        </ul>
                     {% else %}
-                        <ul><li>No patients associated.</li></ul>
+                        <li class="collection-item">No patients associated.</li>
                     {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
         {% else %}
-            <p>No results found.</p>
+            <!-- Rendering Patients -->
+            {% if search_results %}
+                <ul class="collection with-header">
+                {% for result in search_results %}
+                    <li class="collection-item">
+                        Name: {{ result.name[0].given[0] }} {{ result.name[0].family }}
+                        {% if result.birthDate %}
+                        - Date of Birth: {{ result.birthDate | fhirdate }}
+                        {% endif %}
+                        {% if result.gender %}
+                        - Gender: {{ result.gender }}
+                        {% endif %}
+                        {% if result.address %}
+                        - Address: {{ result.address[0].country }}, {{ result.address[0].city }}, {{ result.address[0].postalCode }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
         {% endif %}
-    {% else %}
-        <!-- Rendering Patients -->
-        {% if search_results %}
-            <ul>
-            {% for result in search_results %}
-                <li>
-                    Name: {{ result.name[0].given[0] }} {{ result.name[0].family }}
-                    {% if result.birthDate %}
-                    - Date of Birth: {{ result.birthDate | fhirdate }}
-                    {% endif %}
-                    {% if result.gender %}
-                    - Gender: {{ result.gender }}
-                    {% endif %}
-                    {% if result.address %}
-                    - Address: {{ result.address[0].country }}, {{ result.address[0].city }}, {{ result.address[0].postalCode }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
-    {% endif %}
-    <a href="/search">Back to Search</a>
+
+        <div class="col s12">
+            <a href="/search" class="waves-effect waves-teal btn-flat">Back to Search</a>
+        </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

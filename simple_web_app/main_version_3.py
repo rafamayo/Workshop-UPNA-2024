@@ -104,10 +104,6 @@ def new_patient():
             })
             new_patient.generalPractitioner = [gp_reference]
 
-
-
-
-
         # Attempt to create the Practitioner on the FHIR server
         try:
             result = new_patient.create(smart.server)

@@ -2,16 +2,36 @@
 <html>
 <head>
     <title>Set FHIR Server</title>
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Set FHIR Server URL</h1>
-    <form method="post" action="/server">
-        <label for="server_url">FHIR Server URL:</label><br>
-        <input type="text" id="server_url" name="server_url" value="{{ server_url }}"><br>
-        <input type="submit" value="Update Server">
-        <!-- Cancel button to return to the index page -->
-        <a href="/"><button type="button">Cancel</button></a>
-    </form>
+
+    <div class="container">
+        <h3 class="header center">Set FHIR Server URL</h3>
+        <form method="post" action="/server" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" id="server_url" name="server_url" value="{{ server_url }}" class="validate">
+                    <label for="server_url">FHIR Server URL:</label>
+                </div>
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Update Server</button>
+                    <a href="/" class="waves-effect waves-teal btn-flat">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </body>
 </html>
+
 

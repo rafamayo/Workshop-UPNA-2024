@@ -66,8 +66,39 @@ def create_practitioner():
     return render_template('new_practitioner.html', message=message, practitioner_id=practitioner_id)
 
 
-@app.route('/new_patient')
+@app.route('/new_patient', methods=['GET', 'POST'])
 def new_patient():
+
+    if request.method == 'POST':
+        # Logic to create the new patient
+        new_patient = patient.Patient({
+            'name': [{
+                'use': 'official',
+                'family': request.form['last_name'],
+                'given': [request.form['given_name']],
+            }],
+            'gender': request.form['gender'],
+            'birthDate': request.form['birth_date'],
+            'address': [{
+                'line': [request.form['postcode'] + ' ' + request.form['city'] + ' ' + request.form['country']],
+                'city': request.form['city'],
+                'postalCode': request.form['postcode'],
+                'country': request.form['country']
+            }]
+        })
+
+        # Attempt to create the Patient on the FHIR server
+        try:
+            result = new_patient.create(smart.server)
+            if result:
+                patient_id = new_patient.id  # Capture the ID of the created patient
+                message = f'Patient successfully created with ID: {patient_id}'
+        except Exception as e:
+            message = f"An error occurred: {str(e)}"
+        
+        #return redirect(url_for('index'))  # Redirect to the index page after creation
+        return render_template('new_patient.html', message=message)
+    
     return render_template('new_patient.html')
 
 
